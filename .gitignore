@@ -1,0 +1,5 @@
+# Ignore the actual configuration file with sensitive credentials
+gitea-github-mirror.conf
+
+# Keep the example config in the repo
+!gitea-github-mirror.conf.example

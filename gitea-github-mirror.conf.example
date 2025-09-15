@@ -1,0 +1,57 @@
+#######################################
+# GitHub Configuration
+#######################################
+
+# GitHub owner (can be a username or organization)
+GITHUB_OWNER="YOUR_GITHUB_USER_HERE"
+
+# GitHub personal access token
+# Needs at least read access to the repos
+GITHUB_TOKEN="YOUR_GITHUB_TOKEN_HERE"
+
+
+#######################################
+# Gitea Configuration
+#######################################
+
+# Gitea organization where mirrors will be created
+GITEA_ORG="github-mirror"
+
+# URL to your Gitea instance (e.g. https://git.examplecorp.io)
+GITEA_URL="https://git.examplecorp.io"
+
+# Gitea user that owns the API token
+GITEA_USER="YOUR_GITEA_USER_HERE"
+
+# Gitea API token
+# Needs write permissions to create org repos
+GITEA_TOKEN="YOUR_GITEA_TOKEN_HERE"
+
+
+#######################################
+# Repository Filtering
+#######################################
+
+# Filter mode: "include" = only repos in INCLUDE_REPOS
+#              "exclude" = all repos except those in EXCLUDE_REPOS
+FILTER_MODE="exclude"
+
+# List of repos to include (only used if FILTER_MODE="include")
+INCLUDE_REPOS=("project-beta")
+
+# List of repos to exclude (only used if FILTER_MODE="exclude")
+EXCLUDE_REPOS=("project-alpha" "project-gamma")
+
+
+#######################################
+# Misc Settings
+#######################################
+
+# Mirror interval in minutes (e.g. 60 = hourly)
+MIRROR_INTERVAL=60
+
+# Dry-run mode: true = do not actually create mirrors, just simulate
+DRY_RUN=true
+
+# Debug mode: true = print debug information
+DEBUG=true
