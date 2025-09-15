@@ -142,11 +142,3 @@ Contributions are welcome! Please open issues or submit pull requests to improve
 
 `gitea-github-mirror` is under the **BSD 3-Clause license** unless explicitly noted otherwise.
 See the [LICENSE](./LICENSE) file for more details.
-
-```
-
-```
-
-```
-
-```
