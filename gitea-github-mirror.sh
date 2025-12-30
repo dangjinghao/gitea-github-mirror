@@ -144,8 +144,10 @@ for repo in $REPOS; do
                       \"repo_name\": \"$repo\",
                       \"repo_owner\": \"$GITEA_ORG\",
                       \"mirror\": true,
-                      \"mirror_interval\": \"${MIRROR_INTERVAL}m\",
-                      \"auth_token\": \"$GITHUB_TOKEN\"
+                      \"mirror_interval\": \"$MIRROR_INTERVAL\",
+                      \"auth_token\": \"$GITHUB_TOKEN\",
+                      \"wiki\": $CLONE_WIKI,
+                      \"service\": \"github\"
                     }" \
                 "$GITEA_URL/api/v1/repos/migrate"
             echo "[OK] Migrated GitHub repo $repo as mirror in org $GITEA_ORG"

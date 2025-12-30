@@ -27,6 +27,9 @@ GITEA_USER="YOUR_GITEA_USER_HERE"
 # Needs write permissions to create org repos
 GITEA_TOKEN="YOUR_GITEA_TOKEN_HERE"
 
+# Clone arguments
+CLONE_WIKI=false
+
 
 #######################################
 # Repository Filtering
@@ -47,8 +50,8 @@ EXCLUDE_REPOS=("project-alpha" "project-gamma")
 # Misc Settings
 #######################################
 
-# Mirror interval in minutes (e.g. 60 = hourly)
-MIRROR_INTERVAL=60
+# Mirror interval
+MIRROR_INTERVAL=60m
 
 # Dry-run mode: true = do not actually create mirrors, just simulate
 DRY_RUN=true
