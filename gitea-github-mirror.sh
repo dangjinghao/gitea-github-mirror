@@ -4,6 +4,14 @@ IFS=$'\n\t'
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PATH
 
+
+function debug_log() {
+    if [ "${DEBUG:-false}" = true ]; then
+        echo "[DEBUG] $1" >&2
+    fi
+}
+
+
 #######################################
 # Load configuration from external file
 #######################################
@@ -44,7 +52,7 @@ function get_github_repos() {
 
     REPOS_LIST=""
     if [ "$STATUS" -eq 200 ]; then
-        [ "$DEBUG" = true ] && echo "[DEBUG] GitHub owner is an organization" >&2
+        debug_log "GitHub owner is an organization"
         REPOS_LIST=$(curl --max-time 15 --connect-timeout 5 -k -s -H "Authorization: token $GITHUB_TOKEN" \
             "https://api.github.com/orgs/$GITHUB_OWNER/repos?per_page=100" \
             | awk '
@@ -53,7 +61,7 @@ function get_github_repos() {
                 inobj && /"name":/ {gsub(/[",]/,"",$2); print $2; inobj=0}
             ')
     else
-        [ "$DEBUG" = true ] && echo "[DEBUG] GitHub owner is a user" >&2
+        debug_log "GitHub owner is a user"
         REPOS_LIST=$(curl --max-time 15 --connect-timeout 5 -k -s -H "Authorization: token $GITHUB_TOKEN" \
             "https://api.github.com/users/$GITHUB_OWNER/repos?per_page=100" \
             | awk '
@@ -83,7 +91,7 @@ function ensure_gitea_org() {
             echo "[OK] Created Gitea organization: $GITEA_ORG"
         fi
     else
-        [ "$DEBUG" = true ] && echo "[DEBUG] Gitea organization $GITEA_ORG exists (HTTP $HTTP_CODE)" >&2
+        debug_log "Gitea organization $GITEA_ORG exists (HTTP $HTTP_CODE)"
     fi
 }
 
@@ -102,12 +110,12 @@ REPOS=$(get_github_repos)
 
 # Debug: list GitHub and Gitea repos separately
 if [ "$DEBUG" = true ]; then
-    echo "[DEBUG] GitHub repositories:" >&2
+    debug_log "GitHub repositories:"
     for r in $REPOS; do
         echo "  - $r" >&2
     done
 
-    echo "[DEBUG] Existing Gitea repositories in $GITEA_ORG:" >&2
+    debug_log "Existing Gitea repositories in $GITEA_ORG:"
     for r in $(list_gitea_repos); do
         echo "  - $r" >&2
     done
